@@ -8,7 +8,7 @@ function MainContent() {
         textAlign: 'center'
       }}
     >
-      <p>I love visiting cities around the world.</p>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
 }
