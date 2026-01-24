@@ -5,15 +5,15 @@ function Navbar() {
     <nav
       style={{
         backgroundColor: 'navy',
-        padding: '10px',
+        padding: '15px',
         display: 'flex',
-        gap: '15px'
+        gap: '20px'
       }}
     >
-      <Link style={{ color: 'white' }} to="/">Home</Link>
-      <Link style={{ color: 'white' }} to="/about">About</Link>
-      <Link style={{ color: 'white' }} to="/services">Services</Link>
-      <Link style={{ color: 'white' }} to="/contact">Contact</Link>
+      <Link style={{ color: 'white', textDecoration: 'none' }} to="/">Home</Link>
+      <Link style={{ color: 'white', textDecoration: 'none' }} to="/about">About</Link>
+      <Link style={{ color: 'white', textDecoration: 'none' }} to="/services">Services</Link>
+      <Link style={{ color: 'white', textDecoration: 'none' }} to="/contact">Contact</Link>
     </nav>
   );
 }
