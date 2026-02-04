@@ -1,15 +1,16 @@
+// src/components/RecipeDetail.jsx
 import { useParams, useNavigate } from "react-router-dom";
-import useRecipeStore from "./recipeStore";
 import { useState } from "react";
+import useRecipeStore from "./recipeStore";
 
 const RecipeDetail = () => {
   const { id } = useParams();
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((r) => r.id === Number(id))
-  );
-  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
-  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
   const navigate = useNavigate();
+  const recipe = useRecipeStore(state =>
+    state.recipes.find(r => r.id === Number(id))
+  );
+  const updateRecipe = useRecipeStore(state => state.updateRecipe);
+  const deleteRecipe = useRecipeStore(state => state.deleteRecipe);
 
   const [title, setTitle] = useState(recipe?.title || "");
   const [description, setDescription] = useState(recipe?.description || "");
@@ -32,11 +33,11 @@ const RecipeDetail = () => {
       <input
         type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={e => setTitle(e.target.value)}
       />
       <textarea
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={e => setDescription(e.target.value)}
       />
       <button onClick={handleUpdate}>Update Recipe</button>
       <button onClick={handleDelete}>Delete Recipe</button>
