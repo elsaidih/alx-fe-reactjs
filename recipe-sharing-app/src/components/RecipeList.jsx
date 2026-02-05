@@ -8,7 +8,6 @@ const RecipeList = () => {
   return (
     <div>
       <h2>Recipes</h2>
-
       {recipes.length === 0 && <p>No recipes available</p>}
 
       {recipes.map(recipe => (
