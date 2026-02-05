@@ -1,48 +1,34 @@
-// src/components/RecipeDetail.jsx
-import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import useRecipeStore from "./recipeStore";
+import { useRecipeStore } from './recipeStore';
+import EditRecipeForm from './EditRecipeForm';
+import DeleteRecipeButton from './DeleteRecipeButton';
+import { Link } from 'react-router-dom';
 
-const RecipeDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const recipe = useRecipeStore(state =>
-    state.recipes.find(r => r.id === Number(id))
+const RecipeDetails = ({ recipeId }) => {
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((r) => r.id === parseInt(recipeId))
   );
-  const updateRecipe = useRecipeStore(state => state.updateRecipe);
-  const deleteRecipe = useRecipeStore(state => state.deleteRecipe);
 
-  const [title, setTitle] = useState(recipe?.title || "");
-  const [description, setDescription] = useState(recipe?.description || "");
-
-  if (!recipe) return <p>Recipe not found</p>;
-
-  const handleUpdate = () => {
-    updateRecipe(recipe.id, { title, description });
-    alert("Recipe updated!");
-  };
-
-  const handleDelete = () => {
-    deleteRecipe(recipe.id);
-    navigate("/");
-  };
+  if (!recipe) {
+    return (
+      <div>
+        <p>Recipe not found.</p>
+        <Link to="/">Go back</Link>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h2>Recipe Details</h2>
-      <input
-        type="text"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <textarea
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
-      <button onClick={handleUpdate}>Update Recipe</button>
-      <button onClick={handleDelete}>Delete Recipe</button>
+      <h2>{recipe.title}</h2>
+      <p>{recipe.description}</p>
+      <hr />
+      <h3>Edit Recipe</h3>
+      <EditRecipeForm recipe={recipe} />
+      <DeleteRecipeButton recipeId={recipe.id} />
+      <br />
+      <Link to="/">Back to Home</Link>
     </div>
   );
 };
 
-export default RecipeDetail;
+export default RecipeDetails;
