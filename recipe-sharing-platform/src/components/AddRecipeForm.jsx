@@ -9,7 +9,7 @@ function AddRecipeForm() {
 
   const [errors, setErrors] = useState({});
 
-  // ✅ Validation Function (Required)
+  // ✅ Validation Function
   const validate = () => {
     const newErrors = {};
 
@@ -58,7 +58,7 @@ function AddRecipeForm() {
     setErrors({});
     console.log("Recipe submitted:", formData);
 
-    // Optional: Reset form after submission
+    // Reset form
     setFormData({
       title: "",
       ingredients: "",
@@ -67,16 +67,16 @@ function AddRecipeForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-      <div className="bg-white shadow-lg rounded-xl p-6 sm:p-8">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+    <div className="max-w-md md:max-w-2xl mx-auto p-4 md:p-8">
+      <div className="bg-white shadow-lg rounded-2xl p-6 md:p-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
           Add New Recipe
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           {/* Recipe Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium mb-1">
               Recipe Title
             </label>
             <input
@@ -84,8 +84,8 @@ function AddRecipeForm() {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter recipe title"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             {errors.title && (
               <p className="text-red-500 text-sm mt-1">{errors.title}</p>
@@ -94,16 +94,16 @@ function AddRecipeForm() {
 
           {/* Ingredients */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Ingredients (separate with commas)
+            <label className="block text-sm font-medium mb-1">
+              Ingredients (comma separated)
             </label>
             <textarea
               name="ingredients"
+              rows="3"
               value={formData.ingredients}
               onChange={handleChange}
-              rows="3"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="e.g. Flour, Sugar, Eggs"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             {errors.ingredients && (
               <p className="text-red-500 text-sm mt-1">
@@ -114,16 +114,16 @@ function AddRecipeForm() {
 
           {/* Preparation Steps */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium mb-1">
               Preparation Steps
             </label>
             <textarea
               name="steps"
+              rows="4"
               value={formData.steps}
               onChange={handleChange}
-              rows="4"
-              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Describe the preparation steps"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             {errors.steps && (
               <p className="text-red-500 text-sm mt-1">{errors.steps}</p>
