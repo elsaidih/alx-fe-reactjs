@@ -1,10 +1,19 @@
 import { useParams, Link } from "react-router-dom";
-import recipes from "../data.json";
+import { useState, useEffect } from "react";
+import recipesData from "../data.json";
 
 function RecipeDetail() {
   const { id } = useParams();
+  const [recipe, setRecipe] = useState(null);
 
-  const recipe = recipes.find((r) => r.id === parseInt(id));
+  useEffect(() => {
+    // Simulate fetching data by ID
+    const foundRecipe = recipesData.find(
+      (r) => r.id === parseInt(id)
+    );
+
+    setRecipe(foundRecipe);
+  }, [id]);
 
   if (!recipe) {
     return (
@@ -30,7 +39,6 @@ function RecipeDetail() {
         ← Back to Recipes
       </Link>
 
-      {/* Recipe Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <img
           src={recipe.image}
@@ -47,7 +55,7 @@ function RecipeDetail() {
             {recipe.description}
           </p>
 
-          {/* Ingredients Section */}
+          {/* Ingredients */}
           <div className="mb-6">
             <h2 className="text-2xl font-semibold mb-3 border-b pb-2">
               Ingredients
@@ -59,7 +67,7 @@ function RecipeDetail() {
             </ul>
           </div>
 
-          {/* Instructions Section */}
+          {/* Instructions */}
           <div>
             <h2 className="text-2xl font-semibold mb-3 border-b pb-2">
               Instructions
