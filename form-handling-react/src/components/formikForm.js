@@ -2,18 +2,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 function FormikForm() {
-  // Validation Schema using Yup
   const validationSchema = Yup.object({
-    username: Yup.string()
-      .required("Username is required"),
-
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+    username: Yup.string().required("Username is required"),
+    email: Yup.string().required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   return (
@@ -23,11 +15,7 @@ function FormikForm() {
       </h2>
 
       <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          password: "",
-        }}
+        initialValues={{ username: "", email: "", password: "" }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           console.log("Form submitted:", values);
@@ -36,8 +24,6 @@ function FormikForm() {
         }}
       >
         <Form className="space-y-4">
-
-          {/* Username */}
           <div>
             <Field
               type="text"
@@ -45,14 +31,9 @@ function FormikForm() {
               placeholder="Username"
               className="w-full p-2 border rounded"
             />
-            <ErrorMessage
-              name="username"
-              component="p"
-              className="text-red-500 text-sm"
-            />
+            <ErrorMessage name="username" component="p" className="text-red-500 text-sm" />
           </div>
 
-          {/* Email */}
           <div>
             <Field
               type="email"
@@ -60,14 +41,9 @@ function FormikForm() {
               placeholder="Email"
               className="w-full p-2 border rounded"
             />
-            <ErrorMessage
-              name="email"
-              component="p"
-              className="text-red-500 text-sm"
-            />
+            <ErrorMessage name="email" component="p" className="text-red-500 text-sm" />
           </div>
 
-          {/* Password */}
           <div>
             <Field
               type="password"
@@ -75,11 +51,7 @@ function FormikForm() {
               placeholder="Password"
               className="w-full p-2 border rounded"
             />
-            <ErrorMessage
-              name="password"
-              component="p"
-              className="text-red-500 text-sm"
-            />
+            <ErrorMessage name="password" component="p" className="text-red-500 text-sm" />
           </div>
 
           <button
@@ -88,7 +60,6 @@ function FormikForm() {
           >
             Register
           </button>
-
         </Form>
       </Formik>
     </div>
