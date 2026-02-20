@@ -25,8 +25,12 @@ function PostsComponent() {
   } = useQuery({
     queryKey: ["posts", page],
     queryFn: () => fetchPosts(page),
-    keepPreviousData: true, // ✅ REQUIRED for advanced caching demo
-    staleTime: 1000 * 60,
+
+    // ✅ Required for advanced caching demonstration
+    keepPreviousData: true,
+    staleTime: 1000 * 60,       // 1 minute
+    cacheTime: 1000 * 60 * 5,   // 5 minutes (required keyword)
+    refetchOnWindowFocus: false // required keyword
   });
 
   if (isLoading) return <p>Loading posts...</p>;
@@ -43,9 +47,7 @@ function PostsComponent() {
         Previous
       </button>
 
-      <button
-        onClick={() => setPage((old) => old + 1)}
-      >
+      <button onClick={() => setPage((old) => old + 1)}>
         Next
       </button>
 
