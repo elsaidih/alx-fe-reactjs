@@ -1,22 +1,20 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import AddTodoForm from "./AddTodoForm";
 
-const TodoList = () => {
+function TodoList() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Write Testing", completed: false },
+    { id: 2, text: "Build Projects", completed: false },
+    { id: 3, text: "Practice Daily", completed: false },
   ]);
 
-  const [newTodo, setNewTodo] = useState("");
-
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-
-    setTodos([
-      ...todos,
-      { id: Date.now(), text: newTodo, completed: false },
-    ]);
-    setNewTodo("");
+  const addTodo = (text) => {
+    const newTodo = {
+      id: Date.now(),
+      text,
+      completed: false,
+    };
+    setTodos([...todos, newTodo]);
   };
 
   const toggleTodo = (id) => {
@@ -36,15 +34,7 @@ const TodoList = () => {
   return (
     <div>
       <h1>Todo List</h1>
-
-      <form onSubmit={addTodo}>
-        <input
-          placeholder="Add a todo"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
+      <AddTodoForm addTodo={addTodo} />
 
       <ul>
         {todos.map((todo) => (
@@ -52,15 +42,20 @@ const TodoList = () => {
             <span
               onClick={() => toggleTodo(todo.id)}
               style={{
-                textDecoration: todo.completed
-                  ? "line-through"
-                  : "none",
+                textDecoration: todo.completed ? "line-through" : "none",
                 cursor: "pointer",
               }}
             >
               {todo.text}
             </span>
-            <button onClick={() => deleteTodo(todo.id)}>
+
+            <button
+              data-testid="delete-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
               Delete
             </button>
           </li>
@@ -68,6 +63,6 @@ const TodoList = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default TodoList;
